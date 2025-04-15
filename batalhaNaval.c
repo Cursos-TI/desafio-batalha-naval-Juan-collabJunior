@@ -70,11 +70,61 @@ int main() {
         return 1;
     }
     
+    
+
+
+    // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
+    // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
+    // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
+    // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
+// -----------------------------------------
+    // Navio 3: Diagonal (Down-Right)
     // -----------------------------------------
-    // Exibição do tabuleiro
+    // Este navio é posicionado em diagonal, indo da esquerda para a direita (para baixo).
+    int navioD1_lin = 0;
+    int navioD1_col = 0;
+    
+    // Valida se o navio cabe na diagonal (linha e coluna aumentam).
+    if ((navioD1_lin + SHIP_SIZE <= BOARD_SIZE) && (navioD1_col + SHIP_SIZE <= BOARD_SIZE)) {
+        int k;
+        for(k = 0; k < SHIP_SIZE; k++){
+            if(tabuleiro[navioD1_lin + k][navioD1_col + k] != 0){
+                printf("Erro: Sobreposição no navio diagonal (down-right) na posição (%d, %d).\n", navioD1_lin + k, navioD1_col + k);
+                return 1;
+            }
+            tabuleiro[navioD1_lin + k][navioD1_col + k] = 3; // Marca a posição com 3.
+        }
+    } else {
+        printf("Erro: O navio diagonal (down-right) não cabe no tabuleiro.\n");
+        return 1;
+    }
+    
     // -----------------------------------------
-    // Através de laços aninhados, o tabuleiro é impresso na tela.
-    // 0 representa água e 3 representa as partes dos navios.
+    // Navio 4: Diagonal (Down-Left)
+    // -----------------------------------------
+    // Este navio é posicionado em diagonal, indo da direita para a esquerda (para baixo).
+    int navioD2_lin = 0;
+    int navioD2_col = BOARD_SIZE - 1; // Inicia na última coluna.
+    
+    // Valida se o navio cabe na diagonal (linha aumenta, coluna diminui).
+    if ((navioD2_lin + SHIP_SIZE <= BOARD_SIZE) && (navioD2_col - (SHIP_SIZE - 1) >= 0)) {
+        int k;
+        for(k = 0; k < SHIP_SIZE; k++){
+            if(tabuleiro[navioD2_lin + k][navioD2_col - k] != 0){
+                printf("Erro: Sobreposição no navio diagonal (down-left) na posição (%d, %d).\n", navioD2_lin + k, navioD2_col - k);
+                return 1;
+            }
+            tabuleiro[navioD2_lin + k][navioD2_col - k] = 3; // Marca a posição com 3.
+        }
+    } else {
+        printf("Erro: O navio diagonal (down-left) não cabe no tabuleiro.\n");
+        return 1;
+    }
+    
+    // -----------------------------------------
+    // Exibição do Tabuleiro
+    // -----------------------------------------
+    // Imprime o tabuleiro completo no console, utilizando 0 para água e 3 para as partes dos navios.
     printf("Tabuleiro:\n");
     for(i = 0; i < BOARD_SIZE; i++){
         for(j = 0; j < BOARD_SIZE; j++){
@@ -82,13 +132,6 @@ int main() {
         }
         printf("\n");
     }
-
-
-    // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
-    // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
-    // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
-    // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
-
     // Nível Mestre - Habilidades Especiais com Matrizes
     // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
     // Sugestão: Utilize estruturas de repetição aninhadas para preencher as áreas afetadas por essas habilidades no tabuleiro.
